@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#FAFBFF">
+<meta name="format-detection" content="telephone=no">
+<meta name="mobile-web-app-capable" content="yes">
+<title>فعالية برنامج تدريبي قائم على تحليل السلوك التطبيقي | سما محمد على قطب</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & BASE ===== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{
+  font-family:'Tajawal',sans-serif;
+  background:#FAFBFF;color:#2D3748;
+  overflow-x:hidden;direction:rtl;line-height:1.8;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  -webkit-tap-highlight-color:transparent;
+  -webkit-overflow-scrolling:touch;
+}
+body.menu-open{overflow:hidden;position:fixed;width:100%;height:100%}
+a{text-decoration:none;color:inherit;touch-action:manipulation;-webkit-touch-callout:none}
+button{touch-action:manipulation}
+img{max-width:100%;display:block}
+
+/* ===== NAVBAR ===== */
+.navbar{
+  position:fixed;top:0;right:0;width:100%;z-index:1000;
+  background:rgba(255,255,255,0.92);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  box-shadow:0 2px 20px rgba(0,0,0,0.06);
+  padding:0 40px;padding-top:env(safe-area-inset-top);
+  display:flex;align-items:center;justify-content:space-between;
+  height:calc(70px + env(safe-area-inset-top));
+  -webkit-transition:all 0.3s ease;transition:all 0.3s ease;
+  -webkit-transform:translateZ(0);transform:translateZ(0);
+}
+.nav-logo{
+  font-weight:800;font-size:clamp(1rem,2.5vw,1.3rem);
+  background:linear-gradient(135deg,#4A90D9,#F5C542);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;white-space:nowrap;
+}
+.nav-links{display:flex;gap:26px;align-items:center;list-style:none}
+.nav-links a{
+  font-size:0.88rem;font-weight:500;color:#4A5568;
+  position:relative;-webkit-transition:color 0.3s;transition:color 0.3s;
+  padding:8px 4px;min-height:44px;display:flex;align-items:center;
+}
+.nav-links a:hover{color:#4A90D9}
+.nav-links a::after{
+  content:'';position:absolute;bottom:2px;right:0;width:0;height:2px;
+  background:#4A90D9;-webkit-transition:width 0.3s;transition:width 0.3s;
+}
+.nav-links a:hover::after{width:100%}
+
+/* ===== HAMBURGER ===== */
+.hamburger{
+  display:none;width:44px;height:44px;
+  background:none;border:none;cursor:pointer;
+  position:relative;z-index:1002;
+  -webkit-tap-highlight-color:transparent;
+  padding:10px;
+}
+.hamburger span{
+  display:block;width:24px;height:2.5px;
+  background:#1A365D;border-radius:3px;
+  -webkit-transition:all 0.35s ease;transition:all 0.35s ease;
+  position:absolute;right:10px;
+}
+.hamburger span:nth-child(1){top:12px}
+.hamburger span:nth-child(2){top:20px}
+.hamburger span:nth-child(3){top:28px}
+.hamburger.active span:nth-child(1){
+  -webkit-transform:rotate(45deg) translate(5px,6px);
+  transform:rotate(45deg) translate(5px,6px);
+}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){
+  -webkit-transform:rotate(-45deg) translate(5px,-6px);
+  transform:rotate(-45deg) translate(5px,-6px);
+}
+
+/* ===== MOBILE MENU OVERLAY ===== */
+.mobile-menu{
+  display:none;position:fixed;top:0;right:-100%;width:100%;height:100%;
+  background:rgba(255,255,255,0.98);
+  -webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);
+  z-index:1001;
+  -webkit-transition:right 0.4s cubic-bezier(0.4,0,0.2,1);
+  transition:right 0.4s cubic-bezier(0.4,0,0.2,1);
+  padding:120px 40px 40px;
+  overflow-y:auto;-webkit-overflow-scrolling:touch;
+}
+.mobile-menu.active{right:0}
+.mobile-menu ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.mobile-menu ul li a{
+  display:block;font-size:1.3rem;font-weight:600;color:#1A365D;
+  padding:16px 20px;border-radius:14px;
+  -webkit-transition:all 0.3s;transition:all 0.3s;
+  min-height:44px;
+  background:transparent;
+}
+.mobile-menu ul li a:hover,
+.mobile-menu ul li a:active{
+  background:rgba(74,144,217,0.08);color:#4A90D9;
+}
+.mobile-menu .menu-footer{
+  margin-top:40px;text-align:center;
+  font-size:0.85rem;color:#A0AEC0;line-height:2;
+}
+
+/* ===== HERO ===== */
+.hero{
+  position:relative;width:100%;min-height:100vh;
+  min-height:-webkit-fill-available;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#EBF4FF 0%,#FFF9E6 50%,#F0F7FF 100%);
+  overflow:hidden;
+  padding-top:calc(70px + env(safe-area-inset-top));
+}
+#heroCanvas{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  pointer-events:none;z-index:1;
+  will-change:transform;
+  -webkit-transform:translateZ(0);transform:translateZ(0);
+}
+.hero-content{
+  position:relative;z-index:2;text-align:center;
+  max-width:950px;padding:20px 24px;
+}
+.hero-badge{
+  display:inline-block;
+  background:rgba(74,144,217,0.1);color:#4A90D9;
+  padding:8px 22px;border-radius:50px;
+  font-size:clamp(0.75rem,2vw,0.85rem);font-weight:700;
+  margin-bottom:18px;
+  -webkit-animation:fadeInUp 0.8s ease forwards;animation:fadeInUp 0.8s ease forwards;
+}
+.hero-title{
+  font-size:clamp(1.5rem,4.5vw,2.6rem);font-weight:800;
+  line-height:1.6;margin-bottom:20px;color:#1A365D;
+  -webkit-animation:fadeInUp 0.8s 0.2s ease both;animation:fadeInUp 0.8s 0.2s ease both;
+}
+.hero-subtitle{
+  font-size:clamp(0.9rem,2.5vw,1.1rem);color:#4A5568;
+  line-height:2;max-width:750px;margin:0 auto 16px;
+  -webkit-animation:fadeInUp 0.8s 0.4s ease both;animation:fadeInUp 0.8s 0.4s ease both;
+}
+.hero-meta{
+  font-size:clamp(0.82rem,2vw,0.95rem);color:#718096;
+  margin-bottom:30px;line-height:2.2;
+  -webkit-animation:fadeInUp 0.8s 0.5s ease both;animation:fadeInUp 0.8s 0.5s ease both;
+}
+.hero-meta strong{color:#4A90D9}
+.hero-cta{
+  display:inline-block;
+  background:linear-gradient(135deg,#4A90D9,#6BB5E0);
+  color:#fff;padding:14px 36px;border-radius:50px;
+  font-weight:700;font-size:clamp(0.9rem,2vw,1rem);
+  box-shadow:0 8px 30px rgba(74,144,217,0.3);
+  -webkit-transition:all 0.3s;transition:all 0.3s;
+  cursor:pointer;font-family:'Tajawal',sans-serif;
+  min-height:44px;
+  -webkit-animation:fadeInUp 0.8s 0.6s ease both;animation:fadeInUp 0.8s 0.6s ease both;
+}
+.hero-cta:hover{-webkit-transform:translateY(-3px);transform:translateY(-3px);box-shadow:0 12px 40px rgba(74,144,217,0.4)}
+.hero-cta:active{-webkit-transform:translateY(-1px);transform:translateY(-1px)}
+.floating-shapes{position:absolute;width:100%;height:100%;top:0;left:0;z-index:0}
+.float-shape{
+  position:absolute;border-radius:50%;opacity:0.1;
+  -webkit-animation:floatAround 20s infinite ease-in-out;animation:floatAround 20s infinite ease-in-out;
+  will-change:transform;
+}
+.float-shape:nth-child(1){width:clamp(150px,30vw,300px);height:clamp(150px,30vw,300px);background:#4A90D9;top:-50px;left:-80px;animation-delay:0s}
+.float-shape:nth-child(2){width:clamp(100px,20vw,200px);height:clamp(100px,20vw,200px);background:#F5C542;bottom:-40px;right:-60px;animation-delay:-5s}
+.float-shape:nth-child(3){width:clamp(80px,15vw,150px);height:clamp(80px,15vw,150px);background:#E05D5D;top:40%;right:10%;animation-delay:-10s}
+.float-shape:nth-child(4){width:clamp(90px,18vw,180px);height:clamp(90px,18vw,180px);background:#48BB78;top:20%;left:15%;animation-delay:-15s}
+
+/* ===== SECTIONS ===== */
+.section{padding:clamp(50px,10vw,90px) clamp(16px,4vw,40px);max-width:1200px;margin:0 auto}
+.section-alt{background:linear-gradient(180deg,#F7FAFF,#FEFCF2);padding:clamp(50px,10vw,90px) 0}
+.section-inner{max-width:1200px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+.section-tag{
+  display:inline-block;background:rgba(74,144,217,0.1);color:#4A90D9;
+  padding:6px 18px;border-radius:50px;
+  font-size:0.8rem;font-weight:700;margin-bottom:14px;letter-spacing:1px;
+}
+.section-title{
+  font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;color:#1A365D;
+  margin-bottom:18px;line-height:1.6;
+}
+.section-desc{
+  font-size:clamp(0.9rem,2.2vw,1.02rem);color:#4A5568;
+  line-height:2.1;max-width:850px;margin-bottom:clamp(24px,5vw,40px);
+}
+
+/* ===== CARDS ===== */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(16px,3vw,28px)}
+.cards-grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(16px,3vw,28px)}
+.cards-grid-method{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(16px,3vw,24px)}
+.card{
+  background:#fff;border-radius:20px;
+  padding:clamp(24px,4vw,34px) clamp(20px,3vw,28px);
+  box-shadow:0 4px 25px rgba(0,0,0,0.04);
+  border:1px solid rgba(0,0,0,0.04);
+  -webkit-transition:all 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
+  transition:all 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
+  position:relative;overflow:hidden;
+}
+.card::before{
+  content:'';position:absolute;top:0;right:0;width:100%;height:4px;
+  background:linear-gradient(90deg,#4A90D9,#F5C542);
+  -webkit-transform:scaleX(0);transform:scaleX(0);
+  -webkit-transform-origin:right;transform-origin:right;
+  -webkit-transition:transform 0.4s;transition:transform 0.4s;
+}
+.card:hover::before{-webkit-transform:scaleX(1);transform:scaleX(1)}
+@media(hover:hover){
+  .card:hover{-webkit-transform:translateY(-8px);transform:translateY(-8px);box-shadow:0 20px 60px rgba(0,0,0,0.08)}
+}
+.card-icon{
+  width:58px;height:58px;border-radius:16px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:18px;font-size:1.5rem;
+}
+.card-icon.blue{background:rgba(74,144,217,0.1);color:#4A90D9}
+.card-icon.yellow{background:rgba(245,197,66,0.15);color:#D4A017}
+.card-icon.green{background:rgba(72,187,120,0.1);color:#48BB78}
+.card-icon.red{background:rgba(224,93,93,0.1);color:#E05D5D}
+.card-icon.purple{background:rgba(155,89,182,0.1);color:#9B59B6}
+.card-icon.teal{background:rgba(56,178,172,0.1);color:#38B2AC}
+.card h3{font-size:clamp(1rem,2.5vw,1.12rem);font-weight:700;color:#1A365D;margin-bottom:12px;line-height:1.6}
+.card p{font-size:clamp(0.85rem,2vw,0.93rem);color:#4A5568;line-height:2}
+.card-accent-right{border-right:4px solid #4A90D9}
+.card-accent-green{border-right:4px solid #48BB78}
+
+/* ===== METHOD CARD ===== */
+.method-card{
+  background:#fff;border-radius:18px;
+  padding:clamp(20px,3vw,28px) clamp(18px,3vw,24px);
+  box-shadow:0 3px 20px rgba(0,0,0,0.04);
+  border:1px solid rgba(0,0,0,0.04);
+  -webkit-transition:all 0.3s;transition:all 0.3s;
+  border-right:4px solid #4A90D9;
+}
+@media(hover:hover){.method-card:hover{-webkit-transform:translateY(-4px);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.07)}}
+.method-card .mc-num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:36px;height:36px;border-radius:10px;
+  background:linear-gradient(135deg,#4A90D9,#6BB5E0);
+  color:#fff;font-weight:800;font-size:0.9rem;margin-bottom:12px;
+}
+.method-card h4{font-size:clamp(0.95rem,2.2vw,1.05rem);font-weight:700;color:#1A365D;margin-bottom:8px;line-height:1.6}
+.method-card p{font-size:clamp(0.83rem,2vw,0.9rem);color:#4A5568;line-height:2}
+.method-card.design{border-right-color:#F5C542}
+.method-card.sample{border-right-color:#48BB78}
+.method-card.stats{border-right-color:#9B59B6}
+
+/* ===== STATS ROW ===== */
+.stats-row{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:clamp(12px,2vw,24px);margin:clamp(30px,5vw,50px) 0;
+}
+.stat-box{
+  background:#fff;border-radius:16px;padding:clamp(20px,3vw,30px);
+  text-align:center;box-shadow:0 4px 20px rgba(0,0,0,0.04);
+  border:1px solid rgba(0,0,0,0.04);
+  -webkit-transition:transform 0.3s;transition:transform 0.3s;
+}
+@media(hover:hover){.stat-box:hover{-webkit-transform:translateY(-4px);transform:translateY(-4px)}}
+.stat-number{
+  font-size:clamp(2rem,5vw,2.8rem);font-weight:800;
+  background:linear-gradient(135deg,#4A90D9,#F5C542);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.stat-label{font-size:clamp(0.78rem,2vw,0.9rem);color:#4A5568;margin-top:6px;font-weight:500}
+
+/* ===== RESULTS ===== */
+.results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(16px,3vw,30px)}
+.result-card{
+  background:#fff;border-radius:20px;padding:clamp(24px,4vw,36px);
+  box-shadow:0 4px 25px rgba(0,0,0,0.04);text-align:center;
+  -webkit-transition:all 0.4s;transition:all 0.4s;
+  border:1px solid rgba(0,0,0,0.04);
+}
+@media(hover:hover){.result-card:hover{-webkit-transform:translateY(-6px);transform:translateY(-6px);box-shadow:0 16px 50px rgba(0,0,0,0.08)}}
+.circle-progress{position:relative;width:clamp(100px,20vw,130px);height:clamp(100px,20vw,130px);margin:0 auto 24px}
+.circle-progress svg{-webkit-transform:rotate(-90deg);transform:rotate(-90deg);width:100%;height:100%}
+.circle-progress .bg{fill:none;stroke:#EDF2F7;stroke-width:8}
+.circle-progress .fg{
+  fill:none;stroke-width:8;stroke-linecap:round;
+  stroke-dasharray:377;stroke-dashoffset:377;
+  -webkit-transition:stroke-dashoffset 1.5s ease;transition:stroke-dashoffset 1.5s ease;
+}
+.circle-progress .fg.blue{stroke:#4A90D9}
+.circle-progress .fg.green{stroke:#48BB78}
+.circle-progress .fg.yellow{stroke:#F5C542}
+.circle-value{
+  position:absolute;top:50%;left:50%;
+  -webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);
+  font-size:clamp(1.1rem,3vw,1.5rem);font-weight:700;color:#1A365D;
+}
+.result-card h3{font-size:clamp(0.95rem,2.2vw,1.08rem);color:#1A365D;margin-bottom:10px;font-weight:700;line-height:1.6}
+.result-card p{font-size:clamp(0.83rem,2vw,0.9rem);color:#4A5568;line-height:2}
+.significance-bar{height:8px;background:#EDF2F7;border-radius:10px;margin-top:16px;overflow:hidden}
+.significance-bar .fill{
+  height:100%;border-radius:10px;width:0;
+  -webkit-transition:width 1.5s ease;transition:width 1.5s ease;
+}
+.significance-bar .fill.blue{background:linear-gradient(90deg,#4A90D9,#6BB5E0)}
+.significance-bar .fill.green{background:linear-gradient(90deg,#48BB78,#68D391)}
+.significance-bar .fill.yellow{background:linear-gradient(90deg,#F5C542,#FFD700)}
+
+/* ===== CONCLUSION ===== */
+.conclusion-box{
+  background:linear-gradient(135deg,#4A90D9,#6BB5E0);
+  border-radius:clamp(16px,3vw,24px);padding:clamp(30px,6vw,60px);
+  text-align:center;color:#fff;position:relative;overflow:hidden;
+}
+.conclusion-box::before{content:'';position:absolute;top:-50%;left:-20%;width:400px;height:400px;border-radius:50%;background:rgba(255,255,255,0.08)}
+.conclusion-box::after{content:'';position:absolute;bottom:-30%;right:-10%;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,0.05)}
+.conclusion-box h2{font-size:clamp(1.4rem,3.5vw,2rem);margin-bottom:20px;position:relative;z-index:1}
+.conclusion-box p{font-size:clamp(0.88rem,2vw,1.02rem);line-height:2.2;opacity:0.95;max-width:800px;margin:0 auto 16px;position:relative;z-index:1}
+.conclusion-box ul{list-style:none;text-align:right;max-width:800px;margin:20px auto 0;position:relative;z-index:1}
+.conclusion-box ul li{padding:8px clamp(12px,3vw,20px);font-size:clamp(0.83rem,2vw,0.95rem);line-height:2;position:relative}
+.conclusion-box ul li::before{content:'◀';margin-left:10px;color:#FFD700;font-size:0.8rem}
+
+/* ===== HYPOTHESIS CARDS ===== */
+.hyp-card{
+  background:#fff;border-radius:18px;
+  padding:clamp(22px,3.5vw,30px) clamp(18px,3vw,26px);
+  box-shadow:0 3px 20px rgba(0,0,0,0.04);
+  border:1px solid rgba(0,0,0,0.04);
+  -webkit-transition:all 0.3s;transition:all 0.3s;
+}
+@media(hover:hover){.hyp-card:hover{-webkit-transform:translateY(-5px);transform:translateY(-5px);box-shadow:0 14px 45px rgba(0,0,0,0.07)}}
+.hyp-num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:40px;height:40px;border-radius:50%;
+  background:linear-gradient(135deg,#4A90D9,#6BB5E0);
+  color:#fff;font-weight:800;font-size:1rem;margin-bottom:14px;
+}
+.hyp-card h4{font-size:clamp(0.95rem,2.2vw,1.05rem);font-weight:700;color:#1A365D;margin-bottom:10px;line-height:1.6}
+.hyp-card p{font-size:clamp(0.83rem,2vw,0.92rem);color:#4A5568;line-height:2.1}
+
+/* ===== FOOTER ===== */
+.footer{
+  background:#1A365D;color:#CBD5E0;text-align:center;
+  padding:40px 20px;
+  padding-bottom:calc(40px + env(safe-area-inset-bottom));
+  font-size:clamp(0.8rem,2vw,0.9rem);line-height:2;
+}
+.footer strong{color:#F5C542}
+
+/* ===== BUBBLES ===== */
+.bubbles-container{position:relative;height:clamp(80px,15vw,120px);overflow:hidden;margin:30px 0}
+.bubble{
+  position:absolute;bottom:-60px;
+  background:rgba(74,144,217,0.08);border:2px solid rgba(74,144,217,0.15);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;
+  -webkit-animation:bubbleUp 4s ease-in infinite;animation:bubbleUp 4s ease-in infinite;
+}
+
+/* ===== ANIMATIONS ===== */
+@-webkit-keyframes fadeInUp{from{opacity:0;-webkit-transform:translateY(30px)}to{opacity:1;-webkit-transform:translateY(0)}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@-webkit-keyframes floatAround{0%,100%{-webkit-transform:translate3d(0,0,0) rotate(0deg)}25%{-webkit-transform:translate3d(30px,-40px,0) rotate(90deg)}50%{-webkit-transform:translate3d(-20px,30px,0) rotate(180deg)}75%{-webkit-transform:translate3d(40px,20px,0) rotate(270deg)}}
+@keyframes floatAround{0%,100%{transform:translate3d(0,0,0) rotate(0deg)}25%{transform:translate3d(30px,-40px,0) rotate(90deg)}50%{transform:translate3d(-20px,30px,0) rotate(180deg)}75%{transform:translate3d(40px,20px,0) rotate(270deg)}}
+@-webkit-keyframes bubbleUp{0%{-webkit-transform:translateY(0) scale(0.5);opacity:0}20%{opacity:1;-webkit-transform:translateY(-20px) scale(1)}100%{-webkit-transform:translateY(-200px) scale(0.3);opacity:0}}
+@keyframes bubbleUp{0%{transform:translateY(0) scale(0.5);opacity:0}20%{opacity:1;transform:translateY(-20px) scale(1)}100%{transform:translateY(-200px) scale(0.3);opacity:0}}
+
+.fade-in{
+  opacity:0;-webkit-transform:translate3d(0,40px,0);transform:translate3d(0,40px,0);
+  -webkit-transition:opacity 0.7s ease,transform 0.7s ease;transition:opacity 0.7s ease,transform 0.7s ease;
+}
+.fade-in.visible{opacity:1;-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}
+
+/* ===== REDUCED MOTION ===== */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    -webkit-animation-duration:0.01ms !important;animation-duration:0.01ms !important;
+    -webkit-animation-iteration-count:1 !important;animation-iteration-count:1 !important;
+    -webkit-transition-duration:0.01ms !important;transition-duration:0.01ms !important;
+    scroll-behavior:auto !important;
+  }
+  .fade-in{opacity:1;transform:none}
+  .float-shape{animation:none}
+}
+
+/* ===== RESPONSIVE: 1024px ===== */
+@media(max-width:1024px){
+  .navbar{padding:0 24px;padding-top:env(safe-area-inset-top)}
+  .stats-row{grid-template-columns:repeat(4,1fr)}
+}
+
+/* ===== RESPONSIVE: 768px (TABLET / LARGE MOBILE) ===== */
+@media(max-width:768px){
+  .navbar{padding:0 16px;padding-top:env(safe-area-inset-top);height:calc(60px + env(safe-area-inset-top))}
+  .nav-links{display:none}
+  .hamburger{display:block}
+  .mobile-menu{display:block}
+  .hero{padding-top:calc(60px + env(safe-area-inset-top))}
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .cards-grid{grid-template-columns:repeat(2,1fr)}
+  .cards-grid-2{grid-template-columns:1fr}
+  .cards-grid-method{grid-template-columns:repeat(2,1fr)}
+  .results-grid{grid-template-columns:1fr}
+  .method-section-title{font-size:1.1rem !important}
+}
+
+/* ===== RESPONSIVE: 480px (MOBILE) ===== */
+@media(max-width:480px){
+  .navbar{padding:0 12px;padding-top:env(safe-area-inset-top)}
+  .mobile-menu{padding:100px 24px 24px}
+  .stats-row{grid-template-columns:repeat(2,1fr);gap:10px}
+  .cards-grid{grid-template-columns:1fr}
+  .cards-grid-2{grid-template-columns:1fr}
+  .cards-grid-method{grid-template-columns:1fr}
+  .conclusion-box ul li{padding:6px 10px}
+}
+
+/* ===== RESPONSIVE: 375px (iPhone SE/Mini) ===== */
+@media(max-width:375px){
+  .hero-content{padding:16px}
+  .stat-box{padding:16px 10px}
+  .mobile-menu ul li a{font-size:1.15rem;padding:14px 16px}
+}
+
+/* ===== RESPONSIVE: 320px ===== */
+@media(max-width:320px){
+  .hero-title{font-size:1.3rem}
+  .section-title{font-size:1.3rem}
+  .stats-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-logo">التوحد وتحليل السلوك التطبيقي</div>
+  <ul class="nav-links">
+    <li><a href="#intro">المقدمة</a></li>
+    <li><a href="#problem">المشكلة</a></li>
+    <li><a href="#objectives">الأهداف</a></li>
+    <li><a href="#hypotheses">الفروض</a></li>
+    <li><a href="#method">المنهج</a></li>
+    <li><a href="#results">النتائج</a></li>
+    <li><a href="#conclusion">الخلاصة</a></li>
+  </ul>
+  <button class="hamburger" id="hamburgerBtn" aria-label="القائمة">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#intro" class="mobile-link">المقدمة</a></li>
+    <li><a href="#problem" class="mobile-link">مشكلة الدراسة</a></li>
+    <li><a href="#objectives" class="mobile-link">أهداف الدراسة</a></li>
+    <li><a href="#hypotheses" class="mobile-link">فروض الدراسة</a></li>
+    <li><a href="#method" class="mobile-link">المنهج</a></li>
+    <li><a href="#results" class="mobile-link">النتائج</a></li>
+    <li><a href="#conclusion" class="mobile-link">الخلاصة والتوصيات</a></li>
+  </ul>
+  <div class="menu-footer">
+    إعداد: سما محمد على قطب<br>إشراف: أ.د/ عادل عبدالله محمد
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="floating-shapes">
+    <div class="float-shape"></div><div class="float-shape"></div>
+    <div class="float-shape"></div><div class="float-shape"></div>
+  </div>
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-badge">&#128214; دراسة بحثية — العام الدراسي 2025 / 2026</div>
+    <h1 class="hero-title">فعالية برنامج تدريبي قائم على تحليل السلوك التطبيقي لتنمية السلوك الاستقلالي في تحسين التواصل الوظيفي لدى الأطفال ذوي اضطراب طيف التوحد</h1>
+    <p class="hero-subtitle">دراسة تجريبية رائدة تستكشف كيف يمكن لتحليل السلوك التطبيقي أن يُحدث تحولاً جوهرياً في قدرات التواصل الوظيفي وتنمية السلوك الاستقلالي لدى الأطفال في طيف التوحد</p>
+    <div class="hero-meta">
+      <strong>إعداد الباحثة:</strong> سما محمد على قطب<br>
+      <strong>إشراف:</strong> أ.د/ عادل عبدالله محمد<br>
+      <strong>المكان:</strong> مؤسسة تمكين — مدينة الزقازيق، محافظة الشرقية، مصر
+    </div>
+    <a href="#intro" class="hero-cta">استكشف البحث &#8595;</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="section" style="padding-top:40px;padding-bottom:40px;">
+  <div class="stats-row">
+    <div class="stat-box fade-in"><div class="stat-number" data-target="12">0</div><div class="stat-label">طفلاً شارك في الدراسة</div></div>
+    <div class="stat-box fade-in"><div class="stat-number" data-target="2">0</div><div class="stat-label">مجموعتا دراسة</div></div>
+    <div class="stat-box fade-in"><div class="stat-number" data-target="5">0</div><div class="stat-label">أدوات بحثية</div></div>
+    <div class="stat-box fade-in"><div class="stat-number" data-target="3">0</div><div class="stat-label">نتائج رئيسية</div></div>
+  </div>
+</div>
+
+<!-- المقدمة -->
+<section class="section-alt" id="intro">
+  <div class="section-inner">
+    <div class="fade-in">
+      <span class="section-tag">المقدمة</span>
+      <h2 class="section-title">فهم اضطراب طيف التوحد والتواصل الوظيفي</h2>
+      <p class="section-desc">يُعدّ اضطراب طيف التوحد من الاضطرابات النمائية العصبية التي تظهر على هيئة أنماط مقيدة ومتكررة من السلوكيات والأنشطة، ويؤثر على الأفراد بغض النظر عن الجنس أو العرق أو الحالة الاجتماعية والاقتصادية. وتُشير الإحصائيات إلى أن احتمالية إصابة الذكور تفوق الإناث بأربع إلى خمس مرات، وقد أصبح هذا الاضطراب محل اهتمام عالمي متزايد نظراً لمعدلات انتشاره المقلقة (Sabra, Bellanti, Corsini, Sabra & Sabra, 2020). ويُعرّف قانون تعليم الأفراد ذوي الإعاقات (IDEA) اضطراب طيف التوحد بأنه إعاقة نمائية تؤثر سلباً على التواصل اللفظي والوظيفي والاجتماعي للطفل، وعادة ما يظهر قبل سن الثالثة، ويتسم بالأنشطة التكرارية والحركات النمطية ومقاومة التغييرات في البيئة أو الروتين اليومي والاستجابات غير المعتادة للخبرات الحسية (عادل عبدالله، 2022).</p>
+    </div>
+    <div class="cards-grid">
+      <div class="card fade-in">
+        <div class="card-icon blue"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 6 8 12 8 12s8-6 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <h3>التأثير العصبي النمائي</h3>
+        <p>يُعدّ اضطراب طيف التوحد إعاقة نمائية تؤثر سلباً على التواصل اللفظي والوظيفي والاجتماعي من جانب الطفل، وعادة ما يظهر قبل سن الثالثة. ويتسم بالأنشطة التكرارية والحركات النمطية ومقاومة التغييرات في البيئة أو الروتين اليومي، والاستجابات غير المعتادة للخبرات الحسية. كما يتضمن قصوراً في السلوكيات الاجتماعية والتفاعل الاجتماعي، وقصوراً في التواصل الاجتماعي الذي يشمل جانبي اللغة اللفظية والوظيفية، حيث قد يجد الأفراد المصابون بالتوحد صعوبة في فهم اللغة واستخدامها.</p>
+      </div>
+      <div class="card fade-in">
+        <div class="card-icon yellow"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>مهارات السلوك الاستقلالي</h3>
+        <p>تُعدّ مهارات الحياة الاستقلالية من المهارات الأساسية في حياة كل إنسان سواء كان لديه إعاقة أم لا، وتشمل مهارات الرعاية الذاتية مثل تناول الطعام وارتداء الملابس والنظافة الشخصية ومهارات الحياة اليومية. ويتم اكتسابها في مراحل مبكرة من العمر من خلال الأسرة وخاصة الوالدين ثم من بقية المجتمع. وبالنسبة للأفراد ذوي الإعاقة فإن هذه المهارات ضرورية وينبغي أن تُدرج ضمن مناهجهم التعليمية بصرف النظر عن درجة الإعاقة أو نوعها أو تصنيفها، لأن اكتسابها يساعدهم على تنمية العديد من الصفات التي قد يفتقرون إليها بسبب الإعاقة (إبراهيم الزريقات، 2020).</p>
+      </div>
+      <div class="card fade-in">
+        <div class="card-icon green"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <h3>تحليل السلوك التطبيقي (ABA)</h3>
+        <p>يُعدّ تحليل السلوك التطبيقي مجموعة منظمة من الأساليب العلمية المستخدمة للتأثير على السلوكيات المهمة اجتماعياً، ويتضمن تحديد المتغيرات البيئية ذات الصلة بالسلوك المستهدف وتطوير تقنيات لتعديله استناداً إلى نتائج البحث التجريبي. ويشمل أنشطة متنوعة تعمل على تحسين الأداء البدني والمعرفي والاجتماعي للفرد والتغلب على جوانب القصور (الخطيب، 2017). كما أكدت دراسات عديدة فعالية التدخل بتحليل السلوك التطبيقي في تنمية التواصل الوظيفي والمهارات اللغوية لدى الأطفال ذوي اضطراب طيف التوحد.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- مشكلة الدراسة -->
+<section class="section" id="problem">
+  <div class="fade-in">
+    <span class="section-tag">مشكلة الدراسة</span>
+    <h2 class="section-title">الحاجة إلى هذا البحث</h2>
+    <p class="section-desc">انبعثت مشكلة الدراسة الحالية مما لاحظته الباحثة من خلال تعاملها مع الأطفال ذوي اضطراب طيف التوحد في مؤسسة تمكين، حيث لاحظت قصوراً واضحاً في استخدام اللغة في المواقف الاجتماعية وأثناء التواصل الوظيفي، مما دفعها إلى تنفيذ برنامج تدريبي لمساعدة هؤلاء الأطفال على تحقيق تواصل لغوي أفضل. وقد استند هذا البرنامج إلى تحليل السلوك التطبيقي بهدف تحسين تواصلهم مع الآخرين، وهو ما أكدته العديد من الدراسات السابقة التي أشارت إلى أن اضطراب طيف التوحد يُسبب تحديات عديدة في الحياة اليومية تعيق التواصل والاندماج في البيئة المحيطة.</p>
+  </div>
+  <div class="cards-grid">
+    <div class="card fade-in">
+      <div class="card-icon red"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></div>
+      <h3>عوائق التواصل الوظيفي</h3>
+      <p>يتمثل ضعف التواصل الوظيفي لدى الأطفال ذوي اضطراب طيف التوحد في عدم القدرة على تقديم معلومات عند الطلب، وعدم القدرة على إكمال الجمل الناقصة، وصعوبة في طلب التوضيح وتقديم الوعود، بالإضافة إلى صعوبة طرح الأسئلة أثناء التواصل اللفظي. كما تتجلى المشكلات اللغوية في ضعف التواصل الوظيفي وصعوبة استخدام الكلمات ومعانيها وتحديات في التعبير اللفظي والتفاعل مع الآخرين (Arosio, Foppolo, Pagliarini, Perugini & Guasti, 2017).</p>
+    </div>
+    <div class="card fade-in">
+      <div class="card-icon blue"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+      <h3>تحديات التفاعل الاجتماعي</h3>
+      <p>يؤثر اضطراب طيف التوحد على التفاعل الاجتماعي للأطفال حيث يجدون صعوبة في التواصل الفعّال والتعبير عن مشاعرهم واحتياجاتهم، ويعيق ذلك من يتفاعل معهم. كما يتسم الاضطراب بالقصور في السلوكيات الاجتماعية والتفاعل الاجتماعي، ويشمل قصوراً في التواصل الاجتماعي بجانبيه اللفظي والوظيفي، حيث يصعب على الأطفال المصابين فهم اللغة واستخدامها في سياقات اجتماعية مختلفة (أحمد علي ومريم العنزي، 2018).</p>
+    </div>
+    <div class="card fade-in">
+      <div class="card-icon green"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <h3>تحليل السلوك التطبيقي كتدخل علاجي</h3>
+      <p>يُعدّ تحليل السلوك التطبيقي أحد المداخل والأساليب التدريبية المستخدمة في تنمية قدرات ومهارات الأطفال ذوي اضطراب طيف التوحد، وقد أكدت دراسات عديدة فعالية التدخل بتحليل السلوك التطبيقي في تنمية التواصل الوظيفي وتطوير المهارات اللغوية لدى هؤلاء الأطفال مثل دراسات (Semikina, 2014; Mohammadzaheri et al., 2014; Sorcinelli et al., 2019; Walsh et al., 2021)، مما أدى إلى صياغة السؤال الرئيسي: ما فعالية برنامج تدريبي قائم على تحليل السلوك التطبيقي لتنمية السلوك الاستقلالي في تحسين التواصل الوظيفي لدى الأطفال ذوي اضطراب طيف التوحد؟</p>
+    </div>
+  </div>
+  <div class="bubbles-container" id="bubblesContainer"></div>
+</section>
+
+<!-- أهداف الدراسة -->
+<section class="section-alt" id="objectives">
+  <div class="section-inner">
+    <div class="fade-in">
+      <span class="section-tag">أهداف الدراسة</span>
+      <h2 class="section-title">ما تسعى الدراسة لتحقيقه</h2>
+      <p class="section-desc">صُمّمت الدراسة الحالية لتحقيق هدفين رئيسيين يسهمان في تعزيز الفهم العلمي للتدخلات القائمة على تحليل السلوك التطبيقي ودورها في تنمية السلوك الاستقلالي وتحسين التواصل الوظيفي لدى الأطفال ذوي اضطراب طيف التوحد.</p>
+    </div>
+    <div class="cards-grid-2">
+      <div class="card card-accent-right fade-in">
+        <div class="card-icon blue"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <h3>الهدف الأول: تحسين التواصل الوظيفي</h3>
+        <p>تحسين التواصل الوظيفي لدى الأطفال ذوي اضطراب طيف التوحد من خلال تطبيق برنامج تدريبي قائم على تحليل السلوك التطبيقي يهدف إلى تنمية السلوك الاستقلالي، بحيث يتمكن الأطفال من تطوير مهاراتهم في التعبير عن احتياجاتهم والتفاعل مع الآخرين بشكل أكثر فعالية في المواقف الاجتماعية المختلفة.</p>
+      </div>
+      <div class="card card-accent-green fade-in">
+        <div class="card-icon green"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <h3>الهدف الثاني: التحقق من استمرارية الأثر</h3>
+        <p>التحقق من استمرارية فعالية البرنامج التدريبي القائم على تحليل السلوك التطبيقي وبقاء أثره في تنمية السلوك الاستقلالي وتحسين التواصل الوظيفي لدى الأطفال ذوي اضطراب طيف التوحد، من خلال المقارنة بين نتائج القياس البعدي والقياس التتبعي للتأكد من ثبات التحسن على المدى البعيد.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- فروض الدراسة -->
+<section class="section" id="hypotheses">
+  <div class="fade-in">
+    <span class="section-tag">فروض الدراسة</span>
+    <h2 class="section-title">الفروض البحثية المطروحة</h2>
+    <p class="section-desc">انبثقت من السؤال الرئيسي للدراسة ثلاثة فروض بحثية تسعى الدراسة إلى التحقق منها من خلال التطبيق التجريبي والتحليل الإحصائي.</p>
+  </div>
+  <div class="cards-grid">
+    <div class="hyp-card fade-in">
+      <div class="hyp-num">1</div>
+      <h4>الفرض الأول</h4>
+      <p>توجد فروق ذات دلالة إحصائية بين متوسطي رتب درجات المجموعتين التجريبية والضابطة في القياس البعدي على مقياس التواصل الوظيفي للأطفال ذوي اضطراب طيف التوحد لصالح المجموعة التجريبية.</p>
+    </div>
+    <div class="hyp-card fade-in">
+      <div class="hyp-num">2</div>
+      <h4>الفرض الثاني</h4>
+      <p>توجد فروق ذات دلالة إحصائية بين متوسطي رتب درجات القياسين القبلي والبعدي للمجموعة التجريبية على مقياس التواصل الوظيفي للأطفال ذوي اضطراب طيف التوحد لصالح القياس البعدي.</p>
+    </div>
+    <div class="hyp-card fade-in">
+      <div class="hyp-num">3</div>
+      <h4>الفرض الثالث</h4>
+      <p>لا توجد فروق ذات دلالة إحصائية بين متوسطي رتب درجات القياسين البعدي والتتبعي للمجموعة التجريبية على مقياس التواصل الوظيفي للأطفال ذوي اضطراب طيف التوحد، مما يدل على استمرارية فعالية البرنامج التدريبي وبقاء أثره.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== المنهج ====== -->
+<section class="section-alt" id="method">
+  <div class="section-inner">
+    <div class="fade-in">
+      <span class="section-tag">المنهجية</span>
+      <h2 class="section-title">تصميم البحث وإجراءاته</h2>
+      <p class="section-desc">اعتمدت الدراسة الحالية على المنهج التجريبي، والذي يتألف من متغير مستقل وهو البرنامج التدريبي القائم على تحليل السلوك التطبيقي لتنمية السلوك الاستقلالي، ومتغير تابع وهو تحسين التواصل الوظيفي لدى الأطفال ذوي اضطراب طيف التوحد.</p>
+    </div>
+
+    <div class="cards-grid-2" style="margin-bottom:24px;">
+      <div class="method-card design fade-in">
+        <div class="mc-num">&#9670;</div>
+        <h4>تصميم الدراسة</h4>
+        <p>اعتمدت الدراسة على المنهج التجريبي ذو التصميم شبه التجريبي، حيث تم تقسيم العينة إلى مجموعتين: مجموعة تجريبية تلقت البرنامج التدريبي القائم على تحليل السلوك التطبيقي، ومجموعة ضابطة لم تتلقَ أي تدخل. وتم إجراء قياسات قبلية وبعدية وتتبعية لقياس أثر البرنامج ومدى استمرارية فعاليته.</p>
+      </div>
+      <div class="method-card sample fade-in">
+        <div class="mc-num">&#9670;</div>
+        <h4>عينة الدراسة</h4>
+        <p>تكونت عينة الدراسة الأساسية من (12) طفلاً من الأطفال ذوي اضطراب طيف التوحد والتابعين لمؤسسة تمكين بمدينة الزقازيق بمحافظة الشرقية، وتم تقسيمهم إلى مجموعتين: مجموعة تجريبية قوامها (6) أطفال ومجموعة ضابطة قوامها (6) أطفال، وتتراوح أعمارهم بين (9 – 12) سنة بمتوسط عمري قدره (10.67) وانحراف معياري قدره (1.07).</p>
+      </div>
+    </div>
+
+    <h3 class="fade-in method-section-title" style="font-size:1.3rem;font-weight:700;color:#1A365D;margin:30px 0 20px;">📋 أدوات الدراسة</h3>
+    <div class="cards-grid-method">
+      <div class="method-card fade-in">
+        <div class="mc-num">1</div>
+        <h4>مقياس ستانفورد-بينيه للذكاء</h4>
+        <p>الصورة الخامسة، تعريب وتقنين صفوت فرج (2012). استُخدم لتقييم القدرات المعرفية والعقلية للأطفال المشاركين في الدراسة والتأكد من استيفائهم لشروط العينة.</p>
+      </div>
+      <div class="method-card fade-in">
+        <div class="mc-num">2</div>
+        <h4>مقياس تقدير اضطراب طيف التوحد</h4>
+        <p>مقياس تقدير اضطراب طيف التوحد لمنخفضي الأداء الوظيفي (إعداد: عادل عبدالله محمد، أحمد عزازي، 2015). استُخدم للتحقق من تشخيص الأطفال وتحديد مستوى شدة الاضطراب لديهم.</p>
+      </div>
+      <div class="method-card fade-in">
+        <div class="mc-num">3</div>
+        <h4>مقياس السلوك الاستقلالي</h4>
+        <p>مقياس السلوك الاستقلالي للأطفال ذوي اضطراب طيف التوحد (إعداد: أ.د/ عادل عبدالله محمد، سما محمد على قطب، 2025). يهدف إلى قياس مستوى مهارات السلوك الاستقلالي لدى الأطفال في مجالات الحياة اليومية المختلفة.</p>
+      </div>
+      <div class="method-card fade-in">
+        <div class="mc-num">4</div>
+        <h4>مقياس التواصل الوظيفي</h4>
+        <p>مقياس التواصل الوظيفي للأطفال ذوي اضطراب طيف التوحد (إعداد: أ.د/ عادل عبدالله محمد، سما محمد على قطب، 2025). يقيس مستوى التواصل الوظيفي لدى الأطفال في سياقات تواصلية واجتماعية متنوعة.</p>
+      </div>
+      <div class="method-card fade-in">
+        <div class="mc-num">5</div>
+        <h4>البرنامج التدريبي</h4>
+        <p>البرنامج التدريبي القائم على تحليل السلوك التطبيقي (إعداد: أ.د/ عادل عبدالله محمد، سما محمد على قطب، 2025). يهدف إلى تنمية السلوك الاستقلالي وتحسين التواصل الوظيفي من خلال استراتيجيات تحليل السلوك التطبيقي المتنوعة مثل التعزيز والنمذجة والتسلسل والتشكيل.</p>
+      </div>
+      <div class="method-card stats fade-in">
+        <div class="mc-num">&#9733;</div>
+        <h4>الأساليب الإحصائية</h4>
+        <p>استخدمت الباحثة الأسلوب اللامعلمي باستخدام الحزمة الإحصائية للعلوم الاجتماعية (SPSS)، وتضمنت الأساليب: اختبار مان ويتني (Mann-Whitney U Test) للمقارنة بين المجموعتين، واختبار ويلكوكسن (Wilcoxon Signed-Rank Test) للمقارنة داخل المجموعة الواحدة، وقيمة (Z) لحساب الدلالة الإحصائية.</p>
+      </div>
+    </div>
+
+    <div class="cards-grid-2" style="margin-top:24px;">
+      <div class="method-card fade-in" style="border-right-color:#E05D5D;">
+        <div class="mc-num">📍</div>
+        <h4>الحدود المكانية</h4>
+        <p>تم تطبيق أدوات الدراسة على عينة من الأطفال بالمجموعة التجريبية بمؤسسة تمكين بمدينة الزقازيق — محافظة الشرقية، جمهورية مصر العربية.</p>
+      </div>
+      <div class="method-card fade-in" style="border-right-color:#38B2AC;">
+        <div class="mc-num">📅</div>
+        <h4>الحدود الزمانية</h4>
+        <p>تم تطبيق البرنامج وأدوات الدراسة على عينة الدراسة خلال العام الدراسي 2025 / 2026.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== النتائج ====== -->
+<section class="section" id="results">
+  <div class="fade-in">
+    <span class="section-tag">النتائج</span>
+    <h2 class="section-title">النتائج الرئيسية للدراسة</h2>
+    <p class="section-desc">توصلت الدراسة الحالية إلى ثلاث نتائج رئيسية تُظهر فعالية البرنامج التدريبي القائم على تحليل السلوك التطبيقي في تنمية السلوك الاستقلالي وتحسين التواصل الوظيفي لدى الأطفال ذوي اضطراب طيف التوحد.</p>
+  </div>
+  <div class="results-grid">
+    <div class="result-card fade-in">
+      <div class="circle-progress">
+        <svg width="130" height="130" viewBox="0 0 130 130">
+          <circle class="bg" cx="65" cy="65" r="60"/>
+          <circle class="fg blue" cx="65" cy="65" r="60" data-percent="99"/>
+        </svg>
+        <div class="circle-value" style="font-size:1.2rem">0.01</div>
+      </div>
+      <h3>المجموعة التجريبية مقابل الضابطة</h3>
+      <p>وجود فروق ذات دلالة إحصائية عند مستوى دلالة (0.01) بين متوسطي رتب درجات المجموعتين التجريبية والضابطة في التواصل الوظيفي لصالح المجموعة التجريبية، مما يدل على فعالية البرنامج التدريبي القائم على تحليل السلوك التطبيقي في تحسين التواصل الوظيفي.</p>
+      <div class="significance-bar"><div class="fill blue" data-width="95%"></div></div>
+    </div>
+    <div class="result-card fade-in">
+      <div class="circle-progress">
+        <svg width="130" height="130" viewBox="0 0 130 130">
+          <circle class="bg" cx="65" cy="65" r="60"/>
+          <circle class="fg green" cx="65" cy="65" r="60" data-percent="99"/>
+        </svg>
+        <div class="circle-value" style="font-size:1.2rem">0.01</div>
+      </div>
+      <h3>القياس القبلي مقابل البعدي</h3>
+      <p>وجود فروق ذات دلالة إحصائية عند مستوى دلالة (0.01) بين متوسطي رتب درجات القياسين القبلي والبعدي في التواصل الوظيفي لدى المجموعة التجريبية لصالح القياس البعدي، مما يؤكد التحسن الملحوظ في مهارات التواصل الوظيفي بعد تطبيق البرنامج.</p>
+      <div class="significance-bar"><div class="fill green" data-width="95%"></div></div>
+    </div>
+    <div class="result-card fade-in">
+      <div class="circle-progress">
+        <svg width="130" height="130" viewBox="0 0 130 130">
+          <circle class="bg" cx="65" cy="65" r="60"/>
+          <circle class="fg yellow" cx="65" cy="65" r="60" data-percent="95"/>
+        </svg>
+        <div class="circle-value">&#10003;</div>
+      </div>
+      <h3>استمرارية الأثر</h3>
+      <p>عدم وجود فروق ذات دلالة إحصائية بين متوسطي رتب درجات القياسين البعدي والتتبعي في التواصل الوظيفي لدى المجموعة التجريبية، مما يدل على استمرارية فعالية البرنامج التدريبي وبقاء أثره الإيجابي على المدى البعيد في تحسين التواصل الوظيفي.</p>
+      <div class="significance-bar"><div class="fill yellow" data-width="90%"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== الخلاصة ====== -->
+<section class="section" id="conclusion">
+  <div class="conclusion-box fade-in">
+    <h2>🌟 الخلاصة والتوصيات</h2>
+    <p>تُظهر نتائج هذه الدراسة أن البرنامج التدريبي القائم على تحليل السلوك التطبيقي يُعدّ منهجاً فعّالاً للغاية في تنمية السلوك الاستقلالي وتحسين التواصل الوظيفي لدى الأطفال ذوي اضطراب طيف التوحد. وقد أسفر البرنامج عن تحسينات ذات دلالة إحصائية استمرت مع مرور الوقت، مما يؤكد الأثر الإيجابي الدائم لتحليل السلوك التطبيقي. وبناءً على هذه النتائج توصي الدراسة بما يلي:</p>
+    <ul>
+      <li>دمج البرامج القائمة على تحليل السلوك التطبيقي في المناهج التعليمية والأُطر العلاجية للأطفال ذوي اضطراب طيف التوحد</li>
+      <li>توجيه نظر المتخصصين في مجال اضطراب طيف التوحد لأهمية استخدام استراتيجيات تحليل السلوك التطبيقي</li>
+      <li>توجيه نظر القائمين على العملية التعليمية لتصميم برامج قائمة على تحليل السلوك التطبيقي لتنمية السلوك الاستقلالي وتحسين التواصل الوظيفي</li>
+      <li>تزويد واضعي المناهج الدراسية والمعلمين بالمعلومات والاستراتيجيات العلاجية الفعّالة</li>
+      <li>الاهتمام بتنفيذ برامج مماثلة في مراكز ومؤسسات رعاية الأطفال ذوي اضطراب طيف التوحد</li>
+      <li>إجراء مزيد من الدراسات المستقبلية التي يمكن أن تتوسع في استخدام تحليل السلوك التطبيقي مع فئات عمرية مختلفة</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
+<footer class="footer">
+  <p>
+    إعداد الباحثة: <strong>سما محمد على قطب</strong> — إشراف: <strong>أ.د/ عادل عبدالله محمد</strong>
+    <br>
+    مؤسسة تمكين — مدينة الزقازيق، محافظة الشرقية، جمهورية مصر العربية — العام الدراسي 2025 / 2026
+  </p>
+</footer>
+
+<!-- ====== JAVASCRIPT ====== -->
+<script>
+(function(){
+  'use strict';
+
+  // Detect mobile & iOS
+  var isMobile = window.innerWidth < 768;
+  var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+  // ===== HAMBURGER MENU =====
+  var hamburger = document.getElementById('hamburgerBtn');
+  var mobileMenu = document.getElementById('mobileMenu');
+  var bodyEl = document.body;
+  var scrollPos = 0;
+
+  function toggleMenu() {
+    var isActive = hamburger.classList.contains('active');
+    if (isActive) {
+      hamburger.classList.remove('active');
+      mobileMenu.classList.remove('active');
+      bodyEl.classList.remove('menu-open');
+      if (isIOS) {
+        bodyEl.style.position = '';
+        bodyEl.style.top = '';
+        bodyEl.style.width = '';
+        window.scrollTo(0, scrollPos);
+      }
+    } else {
+      scrollPos = window.scrollY || window.pageYOffset;
+      hamburger.classList.add('active');
+      mobileMenu.classList.add('active');
+      bodyEl.classList.add('menu-open');
+      if (isIOS) {
+        bodyEl.style.position = 'fixed';
+        bodyEl.style.top = '-' + scrollPos + 'px';
+        bodyEl.style.width = '100%';
+      }
+    }
+  }
+
+  hamburger.addEventListener('click', function(e) {
+    e.preventDefault();
+    toggleMenu();
+  });
+
+  var mobileLinks = document.querySelectorAll('.mobile-link');
+  for (var i = 0; i < mobileLinks.length; i++) {
+    mobileLinks[i].addEventListener('click', function() {
+      if (mobileMenu.classList.contains('active')) { toggleMenu(); }
+    });
+  }
+
+  // ===== PUZZLE CANVAS =====
+  var canvas = document.getElementById('heroCanvas');
+  var ctx = canvas.getContext('2d');
+  var puzzlePieces = [];
+  var puzzleColors = ['#4A90D9','#F5C542','#E05D5D','#48BB78','#9B59B6','#6BB5E0'];
+
+  function resizeCanvas() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+
+  function drawPuzzlePiece(x, y, size, rotation, color, opacity) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(rotation);
+    ctx.globalAlpha = opacity;
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    var s = size;
+    ctx.moveTo(-s, -s);
+    ctx.lineTo(s*0.3, -s);
+    ctx.arc(s*0.3, -s - s*0.3, s*0.3, Math.PI*0.5, Math.PI*2.5, false);
+    ctx.lineTo(s, -s);
+    ctx.lineTo(s, s*0.3);
+    ctx.arc(s + s*0.3, s*0.3, s*0.3, Math.PI, Math.PI*3, false);
+    ctx.lineTo(s, s);
+    ctx.lineTo(-s, s);
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function initPuzzlePieces() {
+    puzzlePieces = [];
+    var mob = window.innerWidth < 768;
+    var count = mob ? Math.floor(canvas.width / 120) + 3 : Math.floor(canvas.width / 80) + 5;
+    for (var i = 0; i < count; i++) {
+      puzzlePieces.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: mob ? 10 + Math.random()*14 : 12 + Math.random()*22,
+        rotation: Math.random() * Math.PI * 2,
+        rotSpeed: (Math.random()-0.5) * 0.006,
+        vx: (Math.random()-0.5) * (mob ? 0.25 : 0.4),
+        vy: (Math.random()-0.5) * (mob ? 0.25 : 0.4),
+        color: puzzleColors[Math.floor(Math.random()*puzzleColors.length)],
+        opacity: 0.07 + Math.random()*0.1
+      });
+    }
+  }
+
+  function animatePuzzle() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (var i = 0; i < puzzlePieces.length; i++) {
+      var p = puzzlePieces[i];
+      p.x += p.vx; p.y += p.vy; p.rotation += p.rotSpeed;
+      if (p.x < -50) p.x = canvas.width + 50;
+      if (p.x > canvas.width + 50) p.x = -50;
+      if (p.y < -50) p.y = canvas.height + 50;
+      if (p.y > canvas.height + 50) p.y = -50;
+      drawPuzzlePiece(p.x, p.y, p.size, p.rotation, p.color, p.opacity);
+    }
+    requestAnimationFrame(animatePuzzle);
+  }
+
+  resizeCanvas();
+  initPuzzlePieces();
+  animatePuzzle();
+
+  var resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      isMobile = window.innerWidth < 768;
+      resizeCanvas();
+      initPuzzlePieces();
+    }, 250);
+  }, {passive: true});
+
+  // ===== INTERSECTION OBSERVER =====
+  var fadeElements = document.querySelectorAll('.fade-in');
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function(entries) {
+      for (var i = 0; i < entries.length; i++) {
+        if (entries[i].isIntersecting) {
+          entries[i].target.classList.add('visible');
+          var counter = entries[i].target.querySelector('.stat-number');
+          if (counter) animateCounter(counter);
+          var circles = entries[i].target.querySelectorAll('.fg');
+          for (var j = 0; j < circles.length; j++) {
+            var pct = parseInt(circles[j].getAttribute('data-percent'));
+            var circum = 2 * Math.PI * 60;
+            circles[j].style.strokeDashoffset = circum - (circum * pct / 100);
+          }
+          var bars = entries[i].target.querySelectorAll('.significance-bar .fill');
+          for (var k = 0; k < bars.length; k++) {
+            bars[k].style.width = bars[k].getAttribute('data-width');
+          }
+          observer.unobserve(entries[i].target);
+        }
+      }
+    }, {threshold: 0.1, rootMargin: '0px 0px -30px 0px'});
+    for (var i = 0; i < fadeElements.length; i++) observer.observe(fadeElements[i]);
+  } else {
+    for (var i = 0; i < fadeElements.length; i++) fadeElements[i].classList.add('visible');
+  }
+
+  // ===== COUNTER ANIMATION =====
+  function animateCounter(el) {
+    var target = parseInt(el.getAttribute('data-target'));
+    if (!target || el.dataset.animated) return;
+    el.dataset.animated = 'true';
+    var current = 0, increment = target / 40;
+    var timer = setInterval(function() {
+      current += increment;
+      if (current >= target) { el.textContent = target; clearInterval(timer); }
+      else { el.textContent = Math.floor(current); }
+    }, 40);
+  }
+
+  // ===== BUBBLES =====
+  var bubblesContainer = document.getElementById('bubblesContainer');
+  var bubbleEmojis = ['💬','🗣️','🧩','💡','❤️','🌟','📢','🤝'];
+  var bubbleInterval = isMobile ? 1500 : 800;
+
+  function createBubble() {
+    if (!bubblesContainer) return;
+    var bubble = document.createElement('div');
+    bubble.className = 'bubble';
+    var size = 28 + Math.random() * 26;
+    bubble.style.width = size + 'px';
+    bubble.style.height = size + 'px';
+    bubble.style.left = Math.random() * 88 + '%';
+    bubble.style.animationDuration = (3 + Math.random()*3) + 's';
+    bubble.style.animationDelay = Math.random()*1.5 + 's';
+    bubble.textContent = bubbleEmojis[Math.floor(Math.random()*bubbleEmojis.length)];
+    bubble.style.fontSize = (size*0.38) + 'px';
+    bubblesContainer.appendChild(bubble);
+    setTimeout(function() { if(bubble.parentNode) bubble.parentNode.removeChild(bubble); }, 7000);
+  }
+  setInterval(createBubble, bubbleInterval);
+
+  // ===== SMOOTH SCROLL =====
+  var anchors = document.querySelectorAll('a[href^="#"]');
+  for (var i = 0; i < anchors.length; i++) {
+    anchors[i].addEventListener('click', function(e) {
+      e.preventDefault();
+      var href = this.getAttribute('href');
+      var targetEl = document.querySelector(href);
+      if (targetEl) {
+        var navH = document.getElementById('navbar').offsetHeight;
+        var targetPos = targetEl.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop) - navH;
+        window.scrollTo({top: targetPos, behavior: 'smooth'});
+      }
+    });
+  }
+
+  // ===== NAVBAR SHADOW =====
+  var navbar = document.getElementById('navbar');
+  var ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        navbar.style.boxShadow = window.scrollY > 50 ? '0 4px 30px rgba(0,0,0,0.1)' : '0 2px 20px rgba(0,0,0,0.06)';
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, {passive: true});
+
+  // ===== PARALLAX (DESKTOP ONLY) =====
+  if (!isMobile) {
+    var heroContent = document.querySelector('.hero-content');
+    var pTicking = false;
+    window.addEventListener('scroll', function() {
+      if (!pTicking) {
+        requestAnimationFrame(function() {
+          var scrolled = window.scrollY || window.pageYOffset;
+          if (scrolled < window.innerHeight) {
+            heroContent.style.transform = 'translate3d(0,' + (scrolled*0.3) + 'px,0)';
+            heroContent.style.opacity = 1 - (scrolled / window.innerHeight);
+          }
+          pTicking = false;
+        });
+        pTicking = true;
+      }
+    }, {passive: true});
+  }
+
+  // ===== iOS 100vh FIX =====
+  function setVH() {
+    var vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', vh + 'px');
+  }
+  setVH();
+  window.addEventListener('resize', setVH, {passive: true});
+
+})();
+</script>
+</body>
+</html>
